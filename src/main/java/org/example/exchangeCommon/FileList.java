@@ -1,0 +1,23 @@
+package org.example.exchangeCommon;
+
+import java.util.List;
+
+public class FileList implements Message {
+
+    private List<String> fileList;
+
+    public FileList(List<String> fileList) {
+        this.fileList = fileList;
+    }
+
+    @Override
+    public String getType() {
+        return "fileList";
+    }
+
+    @Override
+    public Object getMessage() {
+        return fileList;
+    }
+}
+
