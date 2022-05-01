@@ -19,6 +19,8 @@ import java.util.stream.Collectors;
 @Slf4j
 public class ServerHandler extends SimpleChannelInboundHandler<Message> {
 
+    private File serverDir;
+
     @Override
     protected void channelRead0(ChannelHandlerContext channelHandlerContext, Message message) {
         log.info("Получен {}", message);
@@ -43,14 +45,15 @@ public class ServerHandler extends SimpleChannelInboundHandler<Message> {
     }
 
     private void registerOrLoginUser(ChannelHandlerContext channelHandlerContext, File serverDir, Message message) {
+        this.serverDir = serverDir;
 
-        log.debug("1111111111111111111111111111111111111111111111111111111111111");
+        log.debug("11");
 
     }
 
     private Path setDirectory() {
         try {
-            Path serverDir = Paths.get("server-file-storage", "server");
+            Path serverDir = Paths.get("org.example.serverside", "serverDir");
             if (!Files.exists(serverDir)) {
                 Files.createDirectory(serverDir);
             }

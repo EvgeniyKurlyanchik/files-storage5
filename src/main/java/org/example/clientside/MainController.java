@@ -100,7 +100,7 @@ public class MainController implements Initializable {
         mainPanel.setManaged(false);
 
         try {
-            clientDir = Paths.get("cloud-storage-client", "client");
+            clientDir = Paths.get("org.example.clientside", "clients");
             if (!Files.exists(clientDir)) {
                 Files.createDirectory(clientDir);
             }

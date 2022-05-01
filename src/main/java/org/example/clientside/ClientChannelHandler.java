@@ -56,7 +56,7 @@ public class ClientChannelHandler extends SimpleChannelInboundHandler<Message> {
 
     public void downloadFile(Message message, ChannelHandlerContext channelHandlerContext) {
         try {
-            File dir = new File("C:\\Users\\Nikolay\\Desktop\\FileCloudStorage\\cloud-storage-client\\client");
+            File dir = new File("C:\\Users\\admin\\Desktop\\ДЗ клиентсерверноефайловое  хранилище");
             GenericFile fileSource = (GenericFile) message.getMessage();
             File fileToCreate = new File(dir, fileSource.getFilename());
             FileOutputStream fos = new FileOutputStream(fileToCreate);
