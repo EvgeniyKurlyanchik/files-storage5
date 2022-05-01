@@ -1,6 +1,5 @@
 package org.example.clientside;
 
-import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelPipeline;
 import io.netty.channel.socket.SocketChannel;
@@ -14,7 +13,7 @@ public class ConnectionInitializer extends ChannelInitializer<SocketChannel> {
     private final MainController mainController;
 
     @Override
-    protected void initChannel(SocketChannel socketChannel) {
+    public void initChannel(SocketChannel socketChannel) {
         ChannelPipeline pipeline = socketChannel.pipeline();
         pipeline.addLast(new ObjectDecoder(1024 * 1024 * 1024, ClassResolvers.cacheDisabled(null)));
         pipeline.addLast("encoder", new ObjectEncoder());

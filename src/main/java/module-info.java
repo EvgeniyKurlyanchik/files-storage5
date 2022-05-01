@@ -7,6 +7,7 @@ module org.example {
     requires java.sql;
     requires org.xerial.sqlitejdbc;
     requires org.slf4j;
+    requires jbcrypt;
     opens org.example to javafx.fxml;
 
     exports org.example.clientside;

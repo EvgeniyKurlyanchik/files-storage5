@@ -12,7 +12,6 @@ import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.codec.serialization.ObjectDecoderInputStream;
 import io.netty.handler.codec.serialization.ObjectEncoderOutputStream;;
 import lombok.extern.slf4j.Slf4j;
-import org.example.exchangeCommon.*;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -20,6 +19,9 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import org.example.exchangeCommon.Actions.Authentication;
+import org.example.exchangeCommon.Actions.FileList;
+import org.example.exchangeCommon.Commands;
 
 @Slf4j
 public class ConnectionManager {
@@ -82,12 +84,12 @@ public class ConnectionManager {
     }
 
     public void serverCopyFile(String file) {
-        Command copyCommand = new Command(file, "copyFile");
+        Commands copyCommand = new Commands(file, "copyFile");
         channel.writeAndFlush(copyCommand);
     }
 
     public void serverDeleteFile(String file) {
-        Command copyCommand = new Command(file, "deleteFile");
+        Commands copyCommand = new Commands(file, "deleteFile");
         channel.writeAndFlush(copyCommand);
     }
 
@@ -101,14 +103,14 @@ public class ConnectionManager {
                 password,
                 generateRootDir(login),
                 false,
-                AuthAction.REGISTER);
+                Actions.REGISTER);
         channel.writeAndFlush(auth);
         log.info("Информация о пользователе передана");
 
     }
 
     public void getServerPath() {
-        channel.writeAndFlush(new Command("", "getDirectory"));
+        channel.writeAndFlush(new Commands("", "getDirectory"));
     }
 
     public Path generateRootDir(String loginField) {

@@ -1,14 +1,13 @@
-package org.example.exchangeCommon;
-
-
-import lombok.AllArgsConstructor;
-import lombok.Data;
+package org.example.exchangeCommon.File;
 
 import java.io.Serializable;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 
 @Data
 @AllArgsConstructor
 public class GenericFile implements Serializable {
-    private String filename;
+    private String fileName;
+    private long fileSize;
     private byte[] content;
 }

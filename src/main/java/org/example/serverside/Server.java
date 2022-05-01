@@ -13,22 +13,17 @@ import io.netty.handler.codec.serialization.ObjectDecoder;
 import io.netty.handler.codec.serialization.ObjectEncoder;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
+import org.example.serverside.authentication.DbHadler;
+import org.example.serverside.authentication.DbProvider;
 
 @Slf4j
 public class Server {
-    private final AuthenticationProvider authentication;
-
-    public AuthenticationProvider getAuthentication() {
-        return authentication;
-    }
-
+    private final int MAX_MESSAGE_SIZE = 1024 * 1024 * 1024;
     @SneakyThrows
     public Server() {
-        this.authentication = new DatabaseAuthenticator();
-        authentication.createDB();
         EventLoopGroup auth = new NioEventLoopGroup(1);
         EventLoopGroup worker = new NioEventLoopGroup();
-
+        DbProvider dbProvider = new DbHadler();
         try {
             ServerBootstrap bootstrap = new ServerBootstrap();
             bootstrap.channel(NioServerSocketChannel.class)
@@ -37,9 +32,9 @@ public class Server {
                         @Override
                         protected void initChannel(SocketChannel channel) {
                             channel.pipeline().addLast(
-                                    new ObjectDecoder(1024 * 1024 * 1024, ClassResolvers.cacheDisabled(null)),
+                                    new ObjectDecoder(MAX_MESSAGE_SIZE, ClassResolvers.cacheDisabled(null)),
                                     new ObjectEncoder(),
-                                    new ServerHandler()
+                                    new ServerHandler(dbProvider)
                             );
                         }
                     });
