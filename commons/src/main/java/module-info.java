@@ -2,6 +2,7 @@ module ru.gb {
     requires org.slf4j;
     requires lombok;
     requires java.logging;
+    requires io.netty.transport;
     opens ru.gb.commons.Actions;
     opens ru.gb.commons.File;
     opens ru.gb.commons.utils;

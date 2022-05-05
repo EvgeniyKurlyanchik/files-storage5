@@ -1,8 +1,8 @@
 package ru.gb.commons.utils;
-
 import io.netty.channel.Channel;
 import java.io.IOException;
 import java.io.RandomAccessFile;
+
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.logging.Logger;
@@ -26,7 +26,7 @@ public class FileUtils {
         return fileUtils;
     }
 
-    public static int PACKAGE_SIZE = 1024*1024*20;
+    public static int PACKAGE_SIZE = 1024*1024*10;
 
     public synchronized void sendFileByParts(Path path, Channel channel, long offset) throws IOException {
 
